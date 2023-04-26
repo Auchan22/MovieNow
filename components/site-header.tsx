@@ -1,13 +1,19 @@
-import Link from "next/link"
+"use client"
+
+import { usePathname } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
+import { SelectGenre } from "@/components/select-genre"
 import { ThemeToggle } from "@/components/theme-toggle"
 
+const genres = ["Accion", "Amor", "Comedia", "Ciencia Ficción"]
+
 export function SiteHeader() {
+  const path = usePathname()
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
@@ -44,6 +50,8 @@ export function SiteHeader() {
                 <span className="sr-only">Twitter</span>
               </div>
             </Link> */}
+            {/* TODO: Agregar selector de genero*/}
+            {path !== "/" && <SelectGenre items={genres} />}
             <Input type="text" placeholder="Search..." />
             <ThemeToggle />
           </nav>
