@@ -1,12 +1,20 @@
 "use client"
 
+import { useEffect } from "react"
 import { useMovies } from "@/hooks"
+import { genreAtom } from "@/store/myStore"
+import { useAtom } from "jotai"
 
 import { GridCard } from "@/components/grid-card"
 
 export default function MoviesPage() {
-  const { moviesQuery } = useMovies()
   // console.log(moviesQuery.data)
+  const [genre_id] = useAtom(genreAtom)
+  useEffect(() => {
+    console.log("Cambio de genero desde movie: ", genre_id)
+  }, [genre_id])
+
+  const { moviesQuery } = useMovies({ genre_id })
 
   return (
     <div className="min-w-screen flex min-h-[80vh] flex-col items-center justify-center">
