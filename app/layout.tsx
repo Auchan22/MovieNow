@@ -3,7 +3,7 @@ import { Metadata } from "next"
 import { Nunito } from "next/font/google"
 
 import { siteConfig } from "@/config/site"
-import { fontNunito, fontSans } from "@/lib/fonts"
+import { fontNunito } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import Providers from "@/components/Provider"
 import { SiteHeader } from "@/components/site-header"

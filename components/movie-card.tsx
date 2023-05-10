@@ -1,7 +1,10 @@
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Movie } from "@/interfaces/Movie"
+import { useQueryClient } from "@tanstack/react-query"
 
 import { cn } from "@/lib/utils"
+import { getMovieInfo } from "@/hooks/useMovie"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -20,8 +23,17 @@ interface Props {
 
 export function MovieCard({ data }: Props) {
   const [isAdded, setIsAdded] = useState<boolean>(false)
+  const queryClient = useQueryClient()
+
+  const router = useRouter()
+
+  const presetData = () => {
+    queryClient.prefetchQuery(["movie", data.id], () =>
+      getMovieInfo(data.id.toString())
+    )
+  }
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[350px]" onMouseEnter={presetData}>
       <CardHeader>
         <img
           src={`http://image.tmdb.org/t/p/w500/${data.poster_path}`}
@@ -44,7 +56,9 @@ export function MovieCard({ data }: Props) {
             )}
           />
         </Button>
-        <Button>Ver Más</Button>
+        <Button onClick={() => router.push(`/movies/${data.id}`)}>
+          Ver Más
+        </Button>
       </CardFooter>
     </Card>
   )
