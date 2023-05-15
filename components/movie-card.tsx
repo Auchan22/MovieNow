@@ -14,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { LikeButton } from "@/components/like-button"
 
 import { Icons } from "./icons"
 
@@ -43,19 +44,14 @@ export function MovieCard({ data }: Props) {
       </CardHeader>
       <CardContent>
         <CardTitle>{data.title}</CardTitle>
-        <CardDescription>{data.overview}</CardDescription>
+        {/* <CardDescription>{data.tagline}</CardDescription> */}
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="ghost" onClick={() => setIsAdded(!isAdded)}>
-          <Icons.outlinedHeart
-            stroke={isAdded ? "red" : "#fff"}
-            fill={isAdded ? "red" : "transparent"}
-            className={cn(
-              "transition delay-150 ease-in",
-              isAdded && "animate-float"
-            )}
-          />
-        </Button>
+        <LikeButton
+          handleClick={() => setIsAdded(!isAdded)}
+          isClicked={isAdded}
+          prompt={false}
+        />
         <Button onClick={() => router.push(`/movies/${data.id}`)}>
           Ver Más
         </Button>
