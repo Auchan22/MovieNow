@@ -25,10 +25,11 @@ export function LikeButton({
           isClicked && "animate-float"
         )}
       />
-      <p className="ml-2">
-        {prompt &&
-          (isClicked ? "Eliminar de Favoritos" : "Agregar a Favoritos")}
-      </p>
+      {prompt && (
+        <p className="ml-2">
+          {isClicked ? "Eliminar de Favoritos" : "Agregar a Favoritos"}
+        </p>
+      )}
     </Button>
   )
 }
