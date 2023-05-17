@@ -1,6 +1,12 @@
 import { Cast } from "@/interfaces/Movie"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 interface Props {
   data: Cast
@@ -18,7 +24,7 @@ export function ActorCard({ data }: Props) {
       </CardHeader>
       <CardContent>
         <CardTitle className="font-bold">{data.name}</CardTitle>
-        {/* <CardDescription>{data.tagline}</CardDescription> */}
+        <CardDescription>{data.character}</CardDescription>
       </CardContent>
     </Card>
   )
