@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useMovie } from "@/hooks"
-import { Department } from "@/interfaces/Movie"
 
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
@@ -16,6 +15,7 @@ interface Props {
 
 export default function MoviePage({ params }: Props) {
   const { data, isLoading } = useMovie(params.id).movieQuery
+  const { data: cast } = useMovie(params.id).castQuery
   const [isAdded, setIsAdded] = useState<boolean>(false)
 
   if (isLoading) return <h1>Cargando</h1>
@@ -58,28 +58,7 @@ export default function MoviePage({ params }: Props) {
           Actores
         </h3>
         <Separator />
-        <GridActores
-          data={{
-            id: 1,
-            cast: [
-              {
-                adult: false,
-                gender: 2,
-                id: 73457,
-                known_for_department: Department.Acting,
-                name: "Chris Pratt",
-                original_name: "Chris Pratt",
-                popularity: 93.825,
-                profile_path: "/83o3koL82jt30EJ0rz4Bnzrt2dd.jpg",
-                cast_id: 11,
-                character: "Mario (voice)",
-                credit_id: "614cffe1d55c3d00674af464",
-                order: 0,
-              },
-            ],
-            crew: [],
-          }}
-        />
+        <GridActores data={cast!} />
       </div>
     </div>
   )
