@@ -29,6 +29,12 @@ export default function MoviePage({ params }: Props) {
           <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
             {data?.overview}
           </p>
+          <p className="text-md my-4 font-bold sm:text-lg">
+            Géneros:{" "}
+            <span className="font-normal text-muted-foreground">
+              {data?.genres.map((el) => el.name).join(", ")}
+            </span>
+          </p>
           <div className="mt-3 flex w-full items-center justify-start gap-5">
             <LikeButton
               handleClick={() => setIsAdded(!isAdded)}
