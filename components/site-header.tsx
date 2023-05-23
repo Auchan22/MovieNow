@@ -1,6 +1,7 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { InputHTMLAttributes, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
@@ -14,6 +15,20 @@ const genres = ["Accion", "Amor", "Comedia", "Ciencia Ficción"]
 
 export function SiteHeader() {
   const path = usePathname()
+  const router = useRouter()
+
+  const [search, setSearch] = useState<string>("")
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      router.push(`/search/${search.toLowerCase()}`)
+    }
+  }
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
@@ -52,7 +67,13 @@ export function SiteHeader() {
             </Link> */}
             {/* TODO: Agregar selector de genero*/}
             {path !== "/" && <SelectGenre items={genres} />}
-            <Input type="text" placeholder="Search..." />
+            <Input
+              type="text"
+              placeholder="Search..."
+              onChange={handleChange}
+              value={search}
+              onKeyDown={handleKeyDown}
+            />
             <ThemeToggle />
           </nav>
         </div>

@@ -23,6 +23,7 @@ const getMovies = async ({ genre_id = "0" }: Props): Promise<Movie[]> => {
     return data.results.filter((m) => m.genre_ids.includes(+genre_id))
   }
 
+  console.log(data.results)
   return data.results
 }
 
