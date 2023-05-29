@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { MediaType, Movie, Multi } from "@/interfaces/Movie"
 import { useQueryClient } from "@tanstack/react-query"
@@ -28,11 +29,6 @@ export function MovieCard({ data }: Props) {
 
   const router = useRouter()
 
-  const redirect = () => {
-    if (data.media_type == MediaType.Movie) router.push(`/movies/${data.id}`)
-    if (data.media_type == MediaType.Tv) router.push(`series/${data.id}`)
-  }
-
   const presetData = () => {
     if (data.media_type === MediaType.Movie) {
       queryClient.prefetchQuery(["movie", data.id], () =>
@@ -46,6 +42,11 @@ export function MovieCard({ data }: Props) {
     //   )
     // }
   }
+
+  const convertedHref = `/${
+    data.media_type == MediaType.Movie ? "movies" : "series"
+  }/${data.id}`
+
   return (
     <Card className="w-[350px]" onMouseEnter={presetData}>
       <CardHeader>
@@ -65,7 +66,7 @@ export function MovieCard({ data }: Props) {
           isClicked={isAdded}
           prompt={false}
         />
-        <Button onClick={redirect}>Ver Más</Button>
+        <Link href={convertedHref}>Ver Más</Link>
       </CardFooter>
     </Card>
   )

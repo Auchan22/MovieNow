@@ -1,9 +1,10 @@
 import { Movie, Multi } from "@/interfaces/Movie"
+import { Serie } from "@/interfaces/Serie"
 
 import { MovieCard } from "./movie-card"
 
 interface Props {
-  data: (Movie & Multi)[]
+  data: any[]
 }
 
 export function GridCard({ data }: Props) {
