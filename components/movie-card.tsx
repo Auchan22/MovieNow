@@ -2,15 +2,13 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { MediaType, Movie, Multi } from "@/interfaces/Movie"
+import { Serie } from "@/interfaces/Serie"
 import { useQueryClient } from "@tanstack/react-query"
 
-import { cn } from "@/lib/utils"
 import { getMovieInfo } from "@/hooks/useMovie"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -20,7 +18,7 @@ import { LikeButton } from "@/components/like-button"
 import { Icons } from "./icons"
 
 interface Props {
-  data: Movie & Multi
+  data: (Movie | Serie) & Multi
 }
 
 export function MovieCard({ data }: Props) {
@@ -44,7 +42,7 @@ export function MovieCard({ data }: Props) {
   }
 
   const convertedHref = `/${
-    data.media_type == MediaType.Movie ? "movies" : "series"
+    data.media_type === MediaType.Movie ? "movies" : "series"
   }/${data.id}`
 
   return (
@@ -57,7 +55,7 @@ export function MovieCard({ data }: Props) {
         />
       </CardHeader>
       <CardContent>
-        <CardTitle>{data.title}</CardTitle>
+        <CardTitle>{data.title || data.name}</CardTitle>
         {/* <CardDescription>{data.tagline}</CardDescription> */}
       </CardContent>
       <CardFooter className="flex justify-between">

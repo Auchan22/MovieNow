@@ -80,3 +80,23 @@ export interface SpokenLanguage {
   iso_639_1: string
   name: string
 }
+
+export interface SerieCast {
+  cast: Cast[]
+  crew: any[]
+  id: number
+}
+
+export interface Cast {
+  adult: boolean
+  gender: number
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: null | string
+  character: string
+  credit_id: string
+  order: number
+}
